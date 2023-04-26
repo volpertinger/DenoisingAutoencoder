@@ -91,6 +91,12 @@ class Autoencoder:
                                                      self.__shape_x, self.__shape_y, self.__shape_z)
         self.__input_train = self.__normalize_reshape(self.__input_train, self.__norm,
                                                       self.__shape_x, self.__shape_y, self.__shape_z)
+        self.__input_train_noise = self.__normalize_reshape(self.__input_train_noise, self.__norm,
+                                                            self.__shape_x, self.__shape_y, self.__shape_z)
+        self.__input_test_noise = self.__normalize_reshape(self.__input_test_noise, self.__norm,
+                                                           self.__shape_x, self.__shape_y, self.__shape_z)
+        self.__input_validation_noise = self.__normalize_reshape(self.__input_validation_noise, self.__norm,
+                                                                 self.__shape_x, self.__shape_y, self.__shape_z)
 
     @staticmethod
     def __normalize_reshape(data, norm, shape_x, shape_y, shape_z):
@@ -112,6 +118,7 @@ class Autoencoder:
         model.add(Conv2D(filters=128, kernel_size=self.__kernel_size_small, activation=self.__activation,
                          padding=self.__padding_model))
         model.add(tf.keras.layers.BatchNormalization())
+
         model.add(Conv2D(filters=256, kernel_size=self.__kernel_size_small, strides=self.__kernel_size_small,
                          activation=self.__activation, padding=self.__padding_model))
         model.add(tf.keras.layers.BatchNormalization())
@@ -207,7 +214,7 @@ class Autoencoder:
         else:
             history = self.__model.fit(self.__input_train_noise, self.__input_train, batch_size=self.__batch_size,
                                        epochs=self.__epochs,
-                                       validation_data=(self.__input_validation_noise, self.__input_train))
+                                       validation_data=(self.__input_validation_noise, self.__input_validation))
             self.__model.save_weights(self.__save_path)
             if self.__with_info:
                 self.__plot_history(history)
