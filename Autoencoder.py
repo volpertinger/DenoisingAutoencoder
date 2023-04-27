@@ -192,7 +192,7 @@ class Autoencoder:
             plt.yticks([])
         plt.show()
 
-    def __predict(self, index):
+    def __predict_by_index(self, index):
         plt.title("real")
         plt.imshow(self.__input_test[index], cmap=self.__cmap)
         plt.show()
@@ -208,9 +208,8 @@ class Autoencoder:
     # ------------------------------------------------------------------------------------------------------------------
 
     def teach(self):
-        if os.path.exists(self.__save_path):
+        if os.path.exists(self.__save_path + ".index"):
             self.__model.load_weights(self.__save_path)
-            return
         else:
             history = self.__model.fit(self.__input_train_noise, self.__input_train, batch_size=self.__batch_size,
                                        epochs=self.__epochs,
@@ -234,6 +233,6 @@ class Autoencoder:
                 if index < 0 or index > max_index:
                     print(f"[start_test_input] wrong index {index}. Index must be from 0 to {max_index}")
                     continue
-                self.__predict(int(inp))
+                self.__predict_by_index(int(inp))
             except:
                 print(f"Wrong value {inp}")
