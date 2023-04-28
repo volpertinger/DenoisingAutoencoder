@@ -112,46 +112,46 @@ class Autoencoder:
     def __init_model(self):
         model = Sequential()
         # encoder network
-        model.add(Conv2D(filters=128, kernel_size=self.__kernel_size_small, activation=self.__activation,
+        model.add(Conv2D(filters=4, kernel_size=self.__kernel_size_small, activation=self.__activation,
                          padding=self.__padding_model, input_shape=(self.__shape_x, self.__shape_y, self.__shape_z)))
         model.add(tf.keras.layers.BatchNormalization())
-        model.add(Conv2D(filters=128, kernel_size=self.__kernel_size_small, activation=self.__activation,
+        model.add(Conv2D(filters=4, kernel_size=self.__kernel_size_small, activation=self.__activation,
                          padding=self.__padding_model))
         model.add(tf.keras.layers.BatchNormalization())
 
-        model.add(Conv2D(filters=256, kernel_size=self.__kernel_size_small, strides=self.__kernel_size_small,
+        model.add(Conv2D(filters=8, kernel_size=self.__kernel_size_small, strides=self.__kernel_size_small,
                          activation=self.__activation, padding=self.__padding_model))
         model.add(tf.keras.layers.BatchNormalization())
-        model.add(Conv2D(filters=256, kernel_size=self.__kernel_size_small, activation=self.__activation,
+        model.add(Conv2D(filters=8, kernel_size=self.__kernel_size_small, activation=self.__activation,
                          padding=self.__padding_model))
         model.add(tf.keras.layers.BatchNormalization())
-        model.add(Conv2D(filters=512, kernel_size=self.__kernel_size_big, activation=self.__activation,
+        model.add(Conv2D(filters=16, kernel_size=self.__kernel_size_big, activation=self.__activation,
                          padding=self.__padding_model))
         model.add(tf.keras.layers.BatchNormalization())
-        model.add(Conv2D(filters=512, kernel_size=self.__kernel_size_small, strides=self.__kernel_size_small,
+        model.add(Conv2D(filters=16, kernel_size=self.__kernel_size_small, strides=self.__kernel_size_small,
                          activation=self.__activation, padding=self.__padding_model))
 
         # decoder network
-        model.add(Conv2D(filters=512, kernel_size=self.__kernel_size_small, activation=self.__activation,
+        model.add(Conv2D(filters=16, kernel_size=self.__kernel_size_small, activation=self.__activation,
                          padding=self.__padding_model))
 
         model.add(tf.keras.layers.Conv2DTranspose(filters=512, kernel_size=self.__kernel_size_small,
                                                   strides=self.__kernel_size_small, activation='relu',
                                                   padding=self.__padding_model))
         model.add(tf.keras.layers.BatchNormalization())
-        model.add(Conv2D(filters=256, kernel_size=self.__kernel_size_small, activation=self.__activation,
+        model.add(Conv2D(filters=8, kernel_size=self.__kernel_size_small, activation=self.__activation,
                          padding=self.__padding_model))
         model.add(tf.keras.layers.BatchNormalization())
-        model.add(Conv2D(filters=256, kernel_size=self.__kernel_size_small, activation=self.__activation,
+        model.add(Conv2D(filters=8, kernel_size=self.__kernel_size_small, activation=self.__activation,
                          padding=self.__padding_model))
         model.add(tf.keras.layers.BatchNormalization())
-        model.add(Conv2D(filters=128, kernel_size=self.__kernel_size_small, activation=self.__activation,
+        model.add(Conv2D(filters=4, kernel_size=self.__kernel_size_small, activation=self.__activation,
                          padding=self.__padding_model))
 
         model.add(tf.keras.layers.Conv2DTranspose(filters=128, kernel_size=self.__kernel_size_small,
                                                   strides=self.__kernel_size_small, activation='relu',
                                                   padding=self.__padding_model))
-        model.add(Conv2D(filters=64, kernel_size=self.__kernel_size_small, activation=self.__activation,
+        model.add(Conv2D(filters=2, kernel_size=self.__kernel_size_small, activation=self.__activation,
                          padding=self.__padding_model))
         model.add(tf.keras.layers.BatchNormalization())
 

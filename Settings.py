@@ -24,7 +24,7 @@ METRICS = ['accuracy']
 
 NOISE_FACTOR = 0.39
 WITH_INFO = True
-EPOCHS = 5
+EPOCHS = 50
 BATCH_SIZE = 256
 SAVE_PATH = "saves/mnist_save"
 
